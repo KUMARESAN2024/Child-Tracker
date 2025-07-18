@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Container, Card, Table, Button, Modal, Alert } from "react-bootstrap";
-import { MapPin, Clock, RefreshCcw, ShieldAlert } from "lucide-react";
+import { FaMapMarkerAlt, FaClock, FaSyncAlt, FaShieldAlt, FaExclamationTriangle } from "react-icons/fa";
 import { motion } from "framer-motion";
 import { MapContainer, TileLayer, Marker, Popup, Polyline, Circle } from "react-leaflet";
 import { toast, ToastContainer } from "react-toastify";
@@ -54,7 +54,7 @@ const ChildActivity = () => {
           setOutsideSafeZone(false);
         }
       },
-      (err) => toast.error("⚠️ GPS Permission Denied. Enable Location Services."),
+      () => toast.error("⚠️ GPS Permission Denied. Enable Location Services."),
       { enableHighAccuracy: true }
     );
   };
@@ -93,7 +93,7 @@ const ChildActivity = () => {
         {/* Emergency SOS Button */}
         <div className="text-center mb-3">
           <Button variant="danger" onClick={() => toast.error("🚨 Emergency SOS Alert Sent!")}>
-            <ShieldAlert size={18} className="me-1" />
+            <FaShieldAlt size={18} className="me-1" />
             Emergency SOS
           </Button>
         </div>
@@ -101,7 +101,7 @@ const ChildActivity = () => {
         {/* Refresh Button */}
         <div className="text-center mb-3">
           <Button variant="success" onClick={updateLocation}>
-            <RefreshCcw size={18} className="me-1" />
+            <FaSyncAlt size={18} className="me-1" />
             Refresh Location
           </Button>
         </div>
@@ -109,7 +109,8 @@ const ChildActivity = () => {
         {/* Safe Zone Alert */}
         {outsideSafeZone && (
           <Alert variant="danger" className="text-center">
-            🚨 Alert: Child has exited the Safe Zone!
+            <FaExclamationTriangle className="me-2" />
+            Alert: Child has exited the Safe Zone!
           </Alert>
         )}
 
@@ -130,17 +131,17 @@ const ChildActivity = () => {
                 {activities.map((activity, index) => (
                   <tr key={index}>
                     <td>
-                      <Clock size={18} className="me-1" />
+                      <FaClock size={18} className="me-1" />
                       {activity.time}
                     </td>
                     <td>
-                      <MapPin size={18} className="me-1" />
+                      <FaMapMarkerAlt size={18} className="me-1" />
                       {activity.location}
                     </td>
                     <td>{activity.details}</td>
                     <td>
-                      <Button 
-                        variant="primary" 
+                      <Button
+                        variant="primary"
                         size="sm"
                         onClick={() => {
                           setSelectedLocation(activity);
@@ -165,13 +166,21 @@ const ChildActivity = () => {
         </Modal.Header>
         <Modal.Body>
           {selectedLocation && (
-            <MapContainer center={[selectedLocation.lat, selectedLocation.lng]} zoom={15} style={{ height: "400px", width: "100%" }}>
+            <MapContainer
+              center={[selectedLocation.lat, selectedLocation.lng]}
+              zoom={15}
+              style={{ height: "400px", width: "100%" }}
+            >
               <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
               <Marker position={[selectedLocation.lat, selectedLocation.lng]} icon={markerIcon}>
                 <Popup>{selectedLocation.details}</Popup>
               </Marker>
               <Polyline positions={routeHistory} color="red" />
-              <Circle center={safeZone} radius={safeZone.radius} pathOptions={{ color: "blue", fillColor: "lightblue" }} />
+              <Circle
+                center={safeZone}
+                radius={safeZone.radius}
+                pathOptions={{ color: "blue", fillColor: "lightblue" }}
+              />
             </MapContainer>
           )}
         </Modal.Body>
