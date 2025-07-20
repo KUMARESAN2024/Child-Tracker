@@ -7,6 +7,10 @@ from activity import router as activity_router
 
 app = FastAPI()
 
+origins = [
+    "https://child-safety-tracker.vercel.app/",
+]
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
