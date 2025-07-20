@@ -13,9 +13,9 @@ ALGORITHM = "HS256"
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 class UserIn(BaseModel):
-    fullName: str = None
+    fullName: str
     email: str
-    phone: str = None
+    phone: str
     password: str
 
 class UserLogin(BaseModel):
