@@ -1,4 +1,4 @@
-const API_BASE_URL = "http://localhost:5000/api/children";
+const API_BASE_URL = "http://localhost:8000/api/children";
 
 // ✅ Fetch child details
 
@@ -60,7 +60,7 @@ import axios from "axios";
 
 export const updateChildLocation = async (id, location) => {
   try {
-    const res = await axios.put(`http://localhost:5000/api/children/update-location/${id}`, location);
+    const res = await axios.put(`http://localhost:8000/api/children/update-location/${id}`, location);
     return res.data;
   } catch (error) {
     console.error("Error updating location", error);
@@ -70,7 +70,7 @@ export const updateChildLocation = async (id, location) => {
 
 export const setSafeZone = async (zoneData) => {
   try {
-    const res = await fetch("http://localhost:5000/api/set-safe-zone", {
+    const res = await fetch("http://localhost:8000/api/set-safe-zone", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(zoneData),

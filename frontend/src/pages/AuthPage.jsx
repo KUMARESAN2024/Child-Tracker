@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-const API_URL = "http://localhost:5000/api/users"; // Your Backend API
+const API_URL = "http://localhost:8000/api/users"; // Your Backend API
 
 const AuthPage = () => {
   const [isSignup, setIsSignup] = useState(false);
