@@ -22,7 +22,7 @@ class UserLogin(BaseModel):
     email: str
     password: str
 
-@router.post("/signup")
+@router.post("/api/users/signup")
 async def signup(user: UserIn, db=Depends(get_db)):
     existing = await db["users"].find_one({"email": user.email})
     if existing:
