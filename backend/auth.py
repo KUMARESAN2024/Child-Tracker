@@ -22,7 +22,7 @@ class UserLogin(BaseModel):
     email: str
     password: str
 
-@router.post("/signup")
+@router.post("/api/users/signup")
 async def signup(user: UserIn, db=Depends(get_db)):
     existing = await db["users"].find_one({"email": user.email})
     if existing:
@@ -42,7 +42,7 @@ async def signup(user: UserIn, db=Depends(get_db)):
         "token": "dummy_token"
     }
 
-@router.post("/login")
+@router.post("/api/users/login")
 async def login(user: UserLogin, db=Depends(get_db)):
     db_user = await db["users"].find_one({"email": user.email})
     if not db_user or not pwd_context.verify(user.password, db_user["password"]):

@@ -40,7 +40,7 @@ class ChildIn(BaseModel):
 
 
 
-@router.post("/children")
+@router.post("/api/users/children")
 async def add_child(child: ChildIn, db=Depends(get_db)):
     # Store userEmail as email for lookup
     child_dict = child.dict()
@@ -52,7 +52,7 @@ async def add_child(child: ChildIn, db=Depends(get_db)):
         c["_id"] = str(c["_id"])
     return {"msg": "Child added", "children": children}
 
-@router.get("/children")
+@router.get("/api/users/children")
 async def get_children(db=Depends(get_db)):
     children = await db["children"].find().to_list(100)
     for c in children:
