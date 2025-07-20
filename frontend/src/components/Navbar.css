@@ -1,0 +1,26 @@
+/* Underline Animation */
+.nav-link.nav-bold {
+  position: relative;
+  display: inline-block;
+  color: #fff;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.nav-link.nav-bold::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px; 
+  width: 100%;
+  height: 2px;
+  background-color: whitesmoke; 
+  transform: scaleX(0);
+  transform-origin: bottom right;
+  transition: transform 0.3s ease;
+}
+
+.nav-link.nav-bold:hover::after {
+  transform: scaleX(1);
+}
