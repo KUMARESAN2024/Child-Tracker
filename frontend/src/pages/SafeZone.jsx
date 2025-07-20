@@ -42,7 +42,7 @@ const SafeZone = () => {
     };
 
     try {
-      const res = await fetch("http://localhost:5000/api/set-safe-zone", {
+      const res = await fetch("https://child-tracker.onrender.com/api/set-safe-zone", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
